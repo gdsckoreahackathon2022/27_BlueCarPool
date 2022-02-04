@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-3">
+    <h2 class="border-bottom py-2">{{ review.subject }} </h2>
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ review.content }} </div>
+            <p style="text-align:right;"> 탑승 차량 : <em> {{ review.car_num }} </em></p>
+            <div class="d-flex justify-content-end">
+                <div class="badge badge-light p-2">
+                    {{ review.create_date }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div clas="container">
+    <h5 class="my-3 border-bottom pb-2">카풀 모집</h5>
+    <form method="post" class="post-form my-3">
+        {% csrf_token %}
+        {% if form.errors %}
+        <div class="alert alert-danger" role="alert">
+            {% for field in form %}
+            {% if field.errors %}
+            <strong>{{ field.label }}</strong>
+            {{ field.errors }}
+            {% endif %}
+            {% endfor %}
+        </div>
+        {% endif %}
+        <div class="form-group">
+            <label for="departure">출발지</label>
+            <input type="text" class="form-control" name="departure" id="departure"
+                   value="{{ form.departure.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="destination">도착지</label>
+            <input type="text" class="form-control" name="destination" id="destination"
+                   value="{{ form.destination.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="car_num">차량 번호</label>
+            <input type="text" class="form-control" name="car_num" id="car_num"
+                   value="{{ form.car_num.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="time">출발 시각</label>
+            <input type="text" class="form-control" name="time" id="time"
+                   value="{{ form.time.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="max_num">최대 인원</label>
+            <input type="text" class="form-control" name="max_num" id="max_num"
+                   value="{{ form.max_num.value|default_if_none:'' }}">
+        </div>
+        <div class="form-group">
+            <label for="present_num">현재 인원</label>
+            <input type="text" class="form-control" name="present_num" id="present_num"
+                   value="{{ form.present_num.value|default_if_none:'' }}">
+        </div>
+        <button type="submit" class="btn btn-primary">등록하기</button>
+    </form>
+</div>
+{% endblock %}

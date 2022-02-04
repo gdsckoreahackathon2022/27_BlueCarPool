@@ -1,0 +1,58 @@
+
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="container my-3">
+    {% if messages %}
+    <div class="alert alert-danger my-3" role="alert">
+        {% for message in messages %}
+        <strong>{{ message.tags }}</strong>
+        <ul><li>{{ message.message }}</li></ul>
+        {% endfor %}
+    </div>
+    {% endif %}
+    <h2 class="border-bottom py-2">
+        {{ recruit.departure }} -> {{ recruit.destination }}
+        <span style="color:red">({{ recruit.present_num }}/{{ recruit.max_num }})</span></h2>
+    차량 번호 :
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ recruit.car_num }}</div>
+        </div>
+    </div>
+    출발 시각 :
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ recruit.time }}</div>
+        </div>
+    </div>
+    최대 인원 :
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ recruit.max_num }}</div>
+        </div>
+    </div>
+    현재 인원 :
+    <div class="card my-3">
+        <div class="card-body">
+            <div class="card-text" style="white-space: pre-line;">{{ recruit.present_num }}</div>
+        </div>
+    </div>
+    <div>
+    <a href="{% url 'recruitment:vote_recruit' recruit.id %}" class="recommend btn btn-primary">
+        예약하기
+    </a>
+    </div>
+</div>
+{% endblock %}
+{% block script %}
+<script type='text/javascript'>
+$(document).ready(function(){
+    $(".recommend").on('click', function() {
+        if(confirm("예약되었습니다")) {
+            location.href = $(this).data('uri');
+        }
+    });
+});
+</script>
+{% endblock %}

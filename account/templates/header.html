@@ -1,0 +1,24 @@
+<div class="carpool_header" style="text-align: center">
+    <div>
+        <h1 class="carpool_logo" style="text-align: center">Blue Carpool</h1>
+    </div>
+    <div class="carpool_header_navbar">
+
+
+        {% if not user.is_authenticated %}
+            <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="carpool_header_nav">
+                <span>login</span>
+            </a>
+            <a href="{% url 'accountapp:create' %}" class="carpool_header_nav">
+                <span>회원가입</span>
+            </a>
+            {% else %}
+            <a href="{% url 'accountapp:detail' pk=user.pk %}" class="carpool_header_nav">
+                <span>MyPage</span>
+            </a>
+            <a href="{% url 'accountapp:logout' %}?next={{ request.path }}" class="carpool_header_nav">
+                <span>logout</span>
+            </a>
+        {% endif %}
+    </div>
+</div>

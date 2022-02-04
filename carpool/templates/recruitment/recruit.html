@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-3">
+    <table class="table">
+        <thead>
+        <tr class="thead-dark">
+            <th>번호</th>
+            <th>출발지->목적지</th>
+            <th>출발시각</th>
+            <th>작성일시</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% if recruit_list %}
+        {% for recruit in recruit_list %}
+        <tr>
+            <td>{{ forloop.counter }}</td>
+            <td>
+                <a href="{% url 'recruitment:detail' recruit.id %}">
+                    {{ recruit.departure }} -> {{ recruit.destination }}
+                    {% if recruit.present_num == recruit.max_num %}
+                    <span class="text-danger small ml-2">
+                        마감
+                    </span>
+                    {% endif %}
+                </a>
+            </td>
+            <td>{{ recruit.time }}</td>
+            <td>{{ recruit.create_date }}</td>
+        </tr>
+        {% endfor %}
+        {% else %}
+        <tr>
+            <td colspan="3">카풀 모집이 없습니다.</td>
+        </tr>
+        {% endif %}
+        </tbody>
+    </table>
+    <a href="{% url 'recruitment:recruit_create' %}" class="btn btn-primary">
+        카풀 모집하기
+    </a>
+</div>
+{% endblock %}
